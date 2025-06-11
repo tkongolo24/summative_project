@@ -1,2 +1,1 @@
-# summative_project
-This is repo is a for the summative assignment 
+This project uses a shell script to automate the creation of directories and files. It is designed to help students stay informed about upcoming assignment deadlines by organizing and setting up the necessary structure automatically.
