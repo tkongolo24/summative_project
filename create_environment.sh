@@ -10,6 +10,13 @@ else
       cd submission_reminder_$name	
 fi 
 
+# Create startup.sh manually 
+cat << 'EOF' > "submission_reminder_Tumba/startup.sh"
+source ./config/config.env"
+source ./modules/functions.sh"
+check_submissions "$ASSIGNMENT"
+EOF
+
 if [ ! -d "app" ]; then 
        	mkdir app;  
 touch app/reminder.sh 
