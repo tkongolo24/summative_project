@@ -9,28 +9,23 @@ while [[ -z "$name" ]]; do
     read -p "Enter your name: " name
 done
 
-if [ -d "submission_reminder_$name" ]; then 
-	cd submission_reminder_$name
+if [ -d "submission_reminder_$name" ]; then
+    cd submission_reminder_$name
 else
-	mkdir submission_reminder_$name
-      cd submission_reminder_$name	
-fi 
+    mkdir submission_reminder_$name
+    cd submission_reminder_$name
+fi
 
 # Create startup.sh manually 
-cat << 'EOF' > "submission_reminder_$name/startup.sh"
+cat << 'EOF' > "startup.sh"
 #!/bin/bash
 # Launch the submission reminder app
 ./app/reminder.sh
 EOF
 
-
-
-if [ ! -d "app" ]; then 
-       	mkdir app;  
-touch app/reminder.sh
-chmod +x "app/reminder.sh"
-#app/reminder.sh 
-cat << 'EOF' > app/reminder.sh 
+if [ ! -d "app" ]; then
+    mkdir app
+    cat << 'EOF' > app/reminder.sh 
 #!/bin/bash
 
 # Source environment variables and helper functions
@@ -47,21 +42,18 @@ echo "--------------------------------------------"
 
 check_submissions $submissions_file
 EOF
+    chmod +x app/reminder.sh
+fi
 
-elif [ ! -d "modules" ]; then  
-	mkdir  modules; 
-touch modules/functions.sh
-chmod +x "modules/functions.sh"
-
-#modules/functions.sh
-cat << 'EOF' > modules/function.sh 
+if [ ! -d "modules" ]; then
+    mkdir modules
+    cat << 'EOF' > modules/functions.sh 
 #!/bin/bash
 
 # Function to read submissions file and output students who have not submitted
 function check_submissions {
     local submissions_file=$1
     echo "Checking submissions in $submissions_file"
-
     # Skip the header and iterate through the lines
     while IFS=, read -r student assignment status; do
         # Remove leading and trailing whitespace
@@ -74,14 +66,14 @@ function check_submissions {
             echo "Reminder: $student has not submitted the $ASSIGNMENT assignment!"
         fi
     done < <(tail -n +2 "$submissions_file") # Skip the header
+}
 EOF
+    chmod +x modules/functions.sh
+fi
 
-elif [ ! -d "assets" ]; then 
-	mkdir assets; 
-touch assets/submissions.txt
-
-#assets/submission.txt
-cat << 'EOF' > "assets/submissions.txt"
+if [ ! -d "assets" ]; then
+    mkdir assets
+    cat << 'EOF' > assets/submissions.txt
 student, assignment, submission status
 Chinemerem, Shell Navigation, not submitted
 Chiagoziem, Git, submitted
@@ -94,19 +86,19 @@ Menes,
 Grace,
 Ayo,
 EOF
+fi
 
-elif [ ! -d "config" ]; then 
-	mkdir config ;  
-touch config/config.env
-
-#config/config.env
-cat << 'EOF' > config/config.env
+if [ ! -d "config" ]; then
+    mkdir config
+    cat << 'EOF' > config/config.env
 # This is the config file
 ASSIGNMENT="Shell Navigation"
 DAYS_REMAINING=2
 EOF
+fi
 
-if [ ! -f "startup.sh" ];then
-	touch startup.sh
-chmod +x "startup.sh"	
-fi 
+if [ ! -f "startup.sh" ]; then
+    touch startup.sh
+    chmod +x startup.sh
+fi
+
