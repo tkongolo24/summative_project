@@ -99,6 +99,5 @@ fi
 
 if [ ! -f "startup.sh" ]; then
     touch startup.sh
-    chmod +x startup.sh
 fi
-
+chmod +x startup.sh 
