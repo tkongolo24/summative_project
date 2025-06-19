@@ -79,12 +79,12 @@ Chinemerem, Shell Navigation, not submitted
 Chiagoziem, Git, submitted
 Divine, Shell Navigation, not submitted
 Anissa, Shell Basics, submitted
-David,
-Samantha,
-Aseye,
-Menes,
-Grace,
-Ayo,
+David, Linux , not submitted
+Samantha, Git , submitted
+Aseye, Shell Navigation , submitted
+Menes, Linux , not submitted 
+Grace, Git , not submitted
+Ayo, Shell Navigation , not submitted
 EOF
 fi
 
